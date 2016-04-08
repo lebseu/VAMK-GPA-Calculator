@@ -22,33 +22,6 @@ def notifyByMail(username, text):
         'text': text
     })
 
-
-# def check(username, password, coursesHash):
-#     try:
-#         opener = calcGPAByWeb.login(username, password)
-#         coursesSource = calcGPAByWeb.getSource(opener, 'Suoritukset')
-#         courses = calcGPAByWeb.getCourses(coursesSource)
-#         coursesHashOld = calcGPAByWeb.getMd5(str(courses))
-#         if coursesHashOld == coursesHash:
-#             return 2
-#         else:
-#             update(username, password, coursesHash)
-#             return 1
-#     except Exception as e:
-#         return 0        #wrong password
-
-# def check2(username, password, coursesHash):
-#     global courses, count
-#     code = check(username, password, coursesHash)
-#     if code == 0:   # wrong password
-#         count = count + 1
-#         if count == 2:
-#             deleleUser(username);
-#             return 0
-#         else:
-#             return check2(username, password, coursesHash)
-#     return code
-
 def check(username, password, coursesHashOld):
     try:
         opener = calcGPAByWeb.login(username, password)
@@ -92,12 +65,10 @@ def deleleUser(username):
         notifyByMail(username, 'You have been deleted from the subscribed users beacause of the wrong password. subscribe again at https://likai.ren/vamk-gpa')
 
 if __name__ == '__main__':
-
     with sqlite3.connect('/var/www/likai.ren/vamk-gpa/db/subscribedUsers.db.sqlite') as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM users')
         data= cursor.fetchall()
-
         if len(data) == 0:
             print('no user!')
         else:
