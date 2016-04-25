@@ -10,8 +10,8 @@ from email.mime.text import MIMEText
 courses = []
 
 def notifyByMail(username, text):
-    key = 'key-ab152ed054c1ae79c7bd3d3d4e9f8bfd'
-    sandbox = 'sandbox95b515f537124a0f8a8e7536d9d998e9.mailgun.org'
+    key = ''
+    sandbox = ''
     recipient = username + '@edu.vamk.fi'
 
     request_url = 'https://api.mailgun.net/v2/' + sandbox +'/messages'
